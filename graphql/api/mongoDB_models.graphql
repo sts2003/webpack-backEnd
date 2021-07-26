@@ -1,0 +1,6 @@
+type Photo {
+  _id: ID!
+  name: String!
+  imagePath: String!
+  description: String!
+}

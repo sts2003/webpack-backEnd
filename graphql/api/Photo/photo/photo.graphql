@@ -1,0 +1,20 @@
+type Query {
+  getAllPhotos: [Photo!]!
+  getPhotoDetail(id: String!): Photo!
+}
+
+type Mutation {
+  createNewPhoto(
+    name: String!
+    imagePath: String!
+    description: String!
+  ): Boolean!
+
+  updatePhoto(
+    id: String!
+    name: String!
+    imagePath: String!
+    description: String!
+  ): Boolean!
+  deletePhoto(id: String!): Boolean!
+}
