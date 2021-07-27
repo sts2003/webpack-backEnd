@@ -1,6 +1,8 @@
 type Query {
-  getAllPhotos: [Photo!]!
+  getAllPhotos(searchValue: String!, limit: Int!, currentPage: Int!): [Photo!]!
   getPhotoDetail(id: String!): Photo!
+  getPhotoTotalPage(searchValue: String!, limit: Int!): Int!
+  getPhotoTotalPageOnlyCnt(searchValue: String!, limit: Int!): Int!
 }
 
 type Mutation {

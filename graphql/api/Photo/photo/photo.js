@@ -3,8 +3,16 @@ import Photo from "../../../model/Photo";
 export default {
   Query: {
     getAllPhotos: async (_, args) => {
+      const { searchValue, limit, currentPage } = args;
       try {
-        const result = await Photo.find({}, {});
+        const result = await Photo.find(
+          {
+            name: { $regex: `.*${searchValue}.*` },
+          },
+          {}
+        )
+          .limit(limit)
+          .skip(currentPage * limit);
 
         return result;
       } catch (e) {
@@ -23,6 +31,40 @@ export default {
       } catch (e) {
         console.log(e);
         return {};
+      }
+    },
+    getPhotoTotalPage: async (_, args) => {
+      const { searchValue, limit } = args;
+
+      try {
+        const result = await Photo.find({
+          name: { $regex: `.*${searchValue}.*` },
+        });
+
+        const cnt = result.length;
+
+        const realTotalPage = cnt % limit > 0 ? cnt / limit + 1 : cnt / limit;
+
+        return parseInt(realTotalPage);
+      } catch (e) {
+        console.log(e);
+        return 0;
+      }
+    },
+    getPhotoTotalPageOnlyCnt: async (_, args) => {
+      const { searchValue, limit } = args;
+
+      try {
+        const result = await Photo.find({
+          name: { $regex: `.*${searchValue}.*` },
+        });
+
+        const cnt = result.length;
+        console.log(result);
+        return parseInt(cnt);
+      } catch (e) {
+        console.log(e);
+        return 0;
       }
     },
   },
