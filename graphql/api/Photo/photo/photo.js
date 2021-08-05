@@ -20,6 +20,7 @@ export default {
         return [];
       }
     },
+
     getPhotoDetail: async (_, args) => {
       const { id } = args;
       try {
@@ -33,6 +34,7 @@ export default {
         return {};
       }
     },
+
     getPhotoTotalPage: async (_, args) => {
       const { searchValue, limit } = args;
 
@@ -51,6 +53,7 @@ export default {
         return 0;
       }
     },
+
     getPhotoTotalPageOnlyCnt: async (_, args) => {
       const { searchValue, limit } = args;
 

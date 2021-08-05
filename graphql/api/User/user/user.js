@@ -29,16 +29,14 @@ export default {
         return false;
       }
     },
+
     tryLogin: async (_, args) => {
       const { email } = args;
 
       try {
-        // 이메일이 가입되어있는가?
-
         const exist = await User.find({ email });
 
         if (exist.length > 0) {
-          // 가입되어있다면 해당 이메일로 인증코드 생성
           const randomCode = [`0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
 
           const code =
@@ -90,20 +88,16 @@ export default {
               },
             }
           );
-
           return true;
         } else {
-          // 가입되어 있지 않다면 리턴 false
           return false;
         }
-
-        // 가입되어있다면 해당 이메일로 인증코드 전송
-        // 전송 후 return true;
       } catch (e) {
         console.log(e);
         return false;
       }
     },
+
     checkSecretCode: async (_, args) => {
       const { email, code } = args;
       try {
